@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
     const wordDisplay = document.getElementById('word-display');
     const typingInput = document.getElementById('typing-input');
@@ -18,51 +17,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let correctWords = 0;
     let totalWords = 0;
 
-
-    
-//   async function fetchWords(difficulty) {
-//     let wordLength;
-//     if (difficulty === 'easy') {
-//         wordLength = 4; // Short words
-//     } else if (difficulty === 'medium') {
-//         wordLength = 6; // Medium words
-//     } else {
-//         wordLength = 9; // Long words
-//     }
-
-//     const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}`);
-//     const data = await response.json();
-
-//     // Extract the word from the array and return it as a string
-//     const word = data[0];
-//     return word;
-// }
-
-
-  async function fetchWords(difficulty) {
-    let wordLength;
-
-    if (difficulty === 'easy') {
-        wordLength = Math.floor(Math.random() * (5 - 3 + 1)) + 3; // Random between 3 and 5
-    } else if (difficulty === 'medium') {
-        wordLength = Math.floor(Math.random() * (8 - 6 + 1)) + 6; // Random between 6 and 8
-    } else {
-        wordLength = Math.floor(Math.random() * (12 - 9 + 1)) + 9; // Random between 9 and 12
+    async function fetchWords(wordLength) {
+        const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}`);
+        const data = await response.json();
+        // Extract the word from the array and return it as a string
+        const word = data[0];
+        return word;
     }
 
-    const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}`);
-    const data = await response.json();
-
-    // Extract the word from the array and return it as a string
-    const word = data[0];
-    return word;
-}
-
-
-
     async function loadNextWord(difficulty) {
-        const newWords = await fetchWords(difficulty);
-        words = words.concat(newWords);
+        let wordLength;
+        if (difficulty === 'easy') {
+            wordLength = Math.floor(Math.random() * (5 - 3 + 1)) + 3; // Random between 3 and 5
+        } else if (difficulty === 'medium') {
+            wordLength = Math.floor(Math.random() * (8 - 6 + 1)) + 6; // Random between 6 and 8
+        } else {
+            wordLength = Math.floor(Math.random() * (12 - 9 + 1)) + 9; // Random between 9 and 12
+        }
+        const newWord = await fetchWords(wordLength);
+        words.push(newWord);
     }
 
     function startGame() {
