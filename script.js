@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     
-    async function fetchWords(difficulty) {
+  async function fetchWords(difficulty) {
     let wordLength;
     if (difficulty === 'easy') {
         wordLength = 4; // Short words
@@ -33,14 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}`);
     const data = await response.json();
 
-    // The API returns a single word in an array, so we need to handle it accordingly
-    if (Array.isArray(data) && data.length > 0) {
-        return data.map(word => word); // Map the array to return the word directly
-    } else {
-        console.error('Unexpected response format:', data);
-        return [];
-    }
+    // Extract the word from the array and return it as a string
+    const word = data[0];
+    return word;
 }
+
 
   
 
