@@ -1,94 +1,104 @@
-/* Improved styles.css */
+/* Updated styles.css with an abstract design */
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #e9ecef;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
     color: #333;
+    overflow: hidden;
 }
 
 .container {
     text-align: center;
-    background: #fff;
-    padding: 30px 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    width: 90%;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    width: 95%;
     max-width: 600px;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.6s ease-in-out;
+    backdrop-filter: blur(10px);
 }
 
 header {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 header h1 {
-    font-size: 2em;
+    font-size: 2.5em;
     color: #007BFF;
     margin: 0;
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .instructions {
-    font-size: 1em;
-    margin-bottom: 25px;
-    color: #555;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: #444;
+    line-height: 1.6;
 }
 
 .game-area {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 #word-display {
-    font-size: 1.8em;
-    margin-bottom: 15px;
+    font-size: 2em;
+    margin-bottom: 20px;
     font-weight: bold;
     color: #212529;
-    word-break: break-word;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    letter-spacing: 2px;
 }
 
 #typing-input {
-    width: 100%;
-    padding: 12px;
-    font-size: 1.1em;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    transition: border-color 0.3s;
+    width: calc(100% - 20px);
+    max-width: 100%;
+    padding: 15px;
+    font-size: 1.2em;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 #typing-input:focus {
     border-color: #007BFF;
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
 }
 
 .controls {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .controls button,
 .controls select {
-    padding: 12px 15px;
+    padding: 12px 20px;
     font-size: 1em;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: #007BFF;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
 }
 
 .controls button:hover,
 .controls select:hover {
     background-color: #0056b3;
-    transform: scale(1.05);
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
 }
 
 .controls button:active {
@@ -96,15 +106,16 @@ header h1 {
 }
 
 .controls select {
-    background-color: #ffffff;
-    border: 1px solid #007BFF;
+    background-color: #fff;
+    border: 2px solid #007BFF;
     color: #007BFF;
+    font-weight: bold;
 }
 
 .stats {
-    margin-top: 25px;
-    font-size: 1em;
-    color: #555;
+    margin-top: 30px;
+    font-size: 1.1em;
+    color: #444;
 }
 
 .stats span {
@@ -116,7 +127,7 @@ header h1 {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-30px);
     }
     to {
         opacity: 1;
@@ -124,26 +135,54 @@ header h1 {
     }
 }
 
+/* Abstract styling for a unique touch */
+.container::before,
+.container::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.2;
+}
+
+.container::before {
+    width: 400px;
+    height: 400px;
+    background: #f6d365;
+    top: -200px;
+    left: -150px;
+    filter: blur(120px);
+}
+
+.container::after {
+    width: 300px;
+    height: 300px;
+    background: #ff9a9e;
+    bottom: -150px;
+    right: -100px;
+    filter: blur(100px);
+}
+
 /* Responsive Design */
 @media (max-width: 600px) {
     .container {
-        width: 95%;
-        padding: 20px;
+        width: 90%;
+        padding: 25px;
     }
 
     header h1 {
-        font-size: 1.8em;
+        font-size: 2em;
     }
 
     #typing-input {
-        font-size: 1.2em;
-        padding: 10px;
+        font-size: 1.1em;
+        padding: 12px;
     }
 
     .controls button,
     .controls select {
         font-size: 1em;
         width: 100%;
-        margin: 5px 0;
+        margin: 8px 0;
     }
 }
