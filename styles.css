@@ -1,30 +1,41 @@
-/* styles.css */
+/* Improved styles.css */
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #e9ecef;
+    color: #333;
 }
 
 .container {
     text-align: center;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 600px;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 header {
     margin-bottom: 20px;
 }
 
+header h1 {
+    font-size: 2em;
+    color: #007BFF;
+    margin: 0;
+}
+
 .instructions {
-    margin-bottom: 20px;
+    font-size: 1em;
+    margin-bottom: 25px;
+    color: #555;
 }
 
 .game-area {
@@ -32,52 +43,106 @@ header {
 }
 
 #word-display {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #212529;
+    word-break: break-word;
 }
 
 #typing-input {
     width: 100%;
-    padding: 10px;
-    font-size: 1em;
+    padding: 12px;
+    font-size: 1.1em;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+#typing-input:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .controls {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
-.controls button, .controls select {
-    margin: 5px;
-    padding: 10px;
+.controls button,
+.controls select {
+    padding: 12px 15px;
     font-size: 1em;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #007BFF;
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.controls button:hover {
+.controls button:hover,
+.controls select:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.controls button:active {
+    background-color: #004085;
+}
+
+.controls select {
+    background-color: #ffffff;
+    border: 1px solid #007BFF;
+    color: #007BFF;
 }
 
 .stats {
-    margin-top: 20px;
+    margin-top: 25px;
+    font-size: 1em;
+    color: #555;
+}
+
+.stats span {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive Design */
 @media (max-width: 600px) {
     .container {
-        width: 90%;
+        width: 95%;
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
     }
 
     #typing-input {
         font-size: 1.2em;
+        padding: 10px;
     }
 
-    .controls button, .controls select {
+    .controls button,
+    .controls select {
+        font-size: 1em;
         width: 100%;
         margin: 5px 0;
     }
