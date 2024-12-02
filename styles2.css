@@ -1,0 +1,206 @@
+/* Full-page styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    background-size: 300% 300%;
+    animation: gradientShift 10s infinite ease-in-out;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Canvas for particles */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+/* Container styling */
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 700px;
+    backdrop-filter: blur(15px);
+    position: relative;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 3em;
+    color: #f97300;
+    margin: 0;
+    text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.instructions {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    color: #555;
+    line-height: 1.8;
+}
+
+.game-area {
+    margin-bottom: 30px;
+}
+
+#word-display {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: #212529;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    letter-spacing: 3px;
+}
+
+#typing-input {
+    width: calc(100% - 30px);
+    padding: 15px;
+    font-size: 1.3em;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    max-width: 100%;
+}
+
+#typing-input:focus {
+    border-color: #f97300;
+    outline: none;
+    box-shadow: 0 0 12px rgba(249, 115, 0, 0.4);
+}
+
+.controls {
+    margin-bottom: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.controls button,
+.controls select {
+    padding: 12px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    background-color: #f97300;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(249, 115, 0, 0.3);
+}
+
+.controls button:hover,
+.controls select:hover {
+    background-color: #cc5a00;
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(249, 115, 0, 0.5);
+}
+
+.controls button:active {
+    background-color: #993d00;
+}
+
+.controls select {
+    background-color: #fff;
+    border: 2px solid #f97300;
+    color: #f97300;
+    font-weight: bold;
+}
+
+.stats {
+    margin-top: 35px;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.stats span {
+    font-weight: bold;
+    color: #f97300;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2em;
+    }
+
+    .container {
+        padding: 25px;
+    }
+
+    .instructions {
+        font-size: 1em;
+    }
+
+    #word-display {
+        font-size: 2em;
+    }
+
+    #typing-input {
+        font-size: 1.1em;
+        padding: 12px;
+    }
+
+    .controls button,
+    .controls select {
+        font-size: 1em;
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    .stats {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .instructions {
+        font-size: 0.9em;
+    }
+
+    #word-display {
+        font-size: 1.8em;
+    }
+
+    #typing-input {
+        font-size: 1em;
+        padding: 10px;
+    }
+}
