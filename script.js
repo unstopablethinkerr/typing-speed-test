@@ -18,19 +18,34 @@ document.addEventListener('DOMContentLoaded', () => {
     let correctWords = 0;
     let totalWords = 0;
 
+    // async function fetchWords(difficulty) {
+    //     let wordLength;
+    //     if (difficulty === 'easy') {
+    //         wordLength = 5; // Short words
+    //     } else if (difficulty === 'medium') {
+    //         wordLength = 7; // Medium words
+    //     } else {
+    //         wordLength = 10; // Long words
+    //     }
+    //     const response = await fetch(`https://api.datamuse.com/words?ml=${wordLength}`);
+    //     const data = await response.json();
+    //     return data.map(wordObj => wordObj.word);
+    // }
+
     async function fetchWords(difficulty) {
-        let wordLength;
-        if (difficulty === 'easy') {
-            wordLength = 5; // Short words
-        } else if (difficulty === 'medium') {
-            wordLength = 7; // Medium words
-        } else {
-            wordLength = 10; // Long words
-        }
-        const response = await fetch(`https://api.datamuse.com/words?ml=${wordLength}`);
-        const data = await response.json();
-        return data.map(wordObj => wordObj.word);
+    const response = await fetch('https://api.datamuse.com/words?max=1000'); // Fetch a large set of words
+    const data = await response.json();
+    let wordLength;
+    if (difficulty === 'easy') {
+        wordLength = 4; // Short words
+    } else if (difficulty === 'medium') {
+        wordLength = 6; // Medium words
+    } else {
+        wordLength = 8; // Long words
     }
+    return data.filter(wordObj => wordObj.word.length === wordLength).map(wordObj => wordObj.word);
+}
+
 
     async function loadNextWord(difficulty) {
         const newWords = await fetchWords(difficulty);
