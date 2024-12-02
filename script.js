@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchWords(difficulty) {
         let wordLength;
         if (difficulty === 'easy') {
-            wordLength = 4; // Short words
+            wordLength = 5; // Short words
         } else if (difficulty === 'medium') {
-            wordLength = 6; // Medium words
+            wordLength = 7; // Medium words
         } else {
-            wordLength = 8; // Long words
+            wordLength = 10; // Long words
         }
         const response = await fetch(`https://api.datamuse.com/words?ml=${wordLength}`);
         const data = await response.json();
