@@ -1,1 +1,38 @@
-<!-- index -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Speed Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Typing Speed Test</h1>
+        </header>
+        <section class="instructions">
+            <p>Type the words as they appear. Your speed and accuracy will be measured.</p>
+        </section>
+        <section class="game-area">
+            <p id="word-display"></p>
+            <input type="text" id="typing-input" placeholder="Start typing...">
+        </section>
+        <section class="controls">
+            <button id="start-button">Start</button>
+            <button id="reset-button">Reset</button>
+            <select id="difficulty-select">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </section>
+        <section class="stats">
+            <p>Time: <span id="time">0</span>s</p>
+            <p>WPM: <span id="wpm">0</span></p>
+            <p>Accuracy: <span id="accuracy">0</span>%</p>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
