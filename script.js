@@ -14,11 +14,27 @@ document.addEventListener('DOMContentLoaded', () => {
     let startTime;
     let isGameRunning = false;
     let timerInterval;
+    let elapsedTime = 0;
+    let correctWords = 0;
+    let totalWords = 0;
 
     async function fetchWords(difficulty) {
-        const response = await fetch('https://api.datamuse.com/words?ml=random');
+        let wordLength;
+        if (difficulty === 'easy') {
+            wordLength = 4; // Short words
+        } else if (difficulty === 'medium') {
+            wordLength = 6; // Medium words
+        } else {
+            wordLength = 8; // Long words
+        }
+        const response = await fetch(`https://api.datamuse.com/words?ml=${wordLength}`);
         const data = await response.json();
-        words = data.map(wordObj => wordObj.word).slice(0, 10); // Limit to 10 words for the test
+        return data.map(wordObj => wordObj.word);
+    }
+
+    async function loadNextWord(difficulty) {
+        const newWords = await fetchWords(difficulty);
+        words = words.concat(newWords);
     }
 
     function startGame() {
@@ -26,7 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
         currentWordIndex = 0;
         startTime = new Date().getTime();
         isGameRunning = true;
-        fetchWords(difficulty).then(() => {
+        words = [];
+        correctWords = 0;
+        totalWords = 0;
+        loadNextWord(difficulty).then(() => {
             wordDisplay.textContent = words[currentWordIndex];
             typingInput.value = '';
             typingInput.focus();
@@ -34,7 +53,21 @@ document.addEventListener('DOMContentLoaded', () => {
             wpmDisplay.textContent = '0';
             accuracyDisplay.textContent = '0';
             startTimer();
+            startButton.textContent = 'Pause';
         });
+    }
+
+    function pauseGame() {
+        isGameRunning = false;
+        clearInterval(timerInterval);
+        startButton.textContent = 'Resume';
+    }
+
+    function resumeGame() {
+        isGameRunning = true;
+        startTime = new Date().getTime() - elapsedTime * 1000;
+        startTimer();
+        startButton.textContent = 'Pause';
     }
 
     function resetGame() {
@@ -45,44 +78,57 @@ document.addEventListener('DOMContentLoaded', () => {
         timeDisplay.textContent = '0';
         wpmDisplay.textContent = '0';
         accuracyDisplay.textContent = '0';
+        startButton.textContent = 'Start';
+        elapsedTime = 0;
     }
 
     function startTimer() {
-        let elapsedTime = 0;
         timerInterval = setInterval(() => {
             elapsedTime++;
             timeDisplay.textContent = elapsedTime;
+            updateStats();
         }, 1000);
     }
 
     function updateStats() {
-        const endTime = new Date().getTime();
-        const timeElapsed = (endTime - startTime) / 1000;
-        const wordsTyped = currentWordIndex;
-        const wpm = (wordsTyped / timeElapsed) * 60;
-        const accuracy = (wordsTyped / words.length) * 100;
+        const timeElapsed = elapsedTime;
+        const wpm = (correctWords / timeElapsed) * 60;
+        const accuracy = (correctWords / totalWords) * 100 || 0;
 
         wpmDisplay.textContent = wpm.toFixed(2);
         accuracyDisplay.textContent = accuracy.toFixed(2);
     }
 
-    typingInput.addEventListener('input', () => {
+    typingInput.addEventListener('input', async () => {
         if (isGameRunning) {
             const typedWord = typingInput.value.trim();
             if (typedWord === words[currentWordIndex]) {
                 currentWordIndex++;
-                if (currentWordIndex < words.length) {
-                    wordDisplay.textContent = words[currentWordIndex];
-                    typingInput.value = '';
-                } else {
-                    isGameRunning = false;
-                    clearInterval(timerInterval);
-                    updateStats();
+                correctWords++;
+                totalWords++;
+                if (currentWordIndex >= words.length) {
+                    const difficulty = difficultySelect.value;
+                    await loadNextWord(difficulty);
                 }
+                wordDisplay.textContent = words[currentWordIndex];
+                typingInput.value = '';
+            } else if (typedWord.length === words[currentWordIndex].length) {
+                totalWords++;
+                wordDisplay.textContent = words[currentWordIndex];
+                typingInput.value = '';
             }
         }
     });
 
-    startButton.addEventListener('click', startGame);
+    startButton.addEventListener('click', () => {
+        if (!isGameRunning) {
+            startGame();
+        } else if (startButton.textContent === 'Pause') {
+            pauseGame();
+        } else {
+            resumeGame();
+        }
+    });
+
     resetButton.addEventListener('click', resetGame);
 });
