@@ -18,20 +18,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let correctWords = 0;
     let totalWords = 0;
 
+
+    
     async function fetchWords(difficulty) {
-        let wordLength;
-        if (difficulty === 'easy') {
-            wordLength = 4; // Short words
-        } else if (difficulty === 'medium') {
-            wordLength = 6; // Medium words
-        } else {
-            wordLength = 9; // Long words
-        }
-        // const response = await fetch(`https://api.datamuse.com/words?ml=${wordLength}`);
-        const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}`);
-        const data = await response.json();
-        return data.map(wordObj => wordObj.word);
+    let wordLength;
+    if (difficulty === 'easy') {
+        wordLength = 4; // Short words
+    } else if (difficulty === 'medium') {
+        wordLength = 6; // Medium words
+    } else {
+        wordLength = 9; // Long words
     }
+
+    const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}`);
+    const data = await response.json();
+
+    // The API returns a single word in an array, so we need to handle it accordingly
+    if (Array.isArray(data) && data.length > 0) {
+        return data.map(word => word); // Map the array to return the word directly
+    } else {
+        console.error('Unexpected response format:', data);
+        return [];
+    }
+}
 
   
 
