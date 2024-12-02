@@ -1,5 +1,3 @@
-/* Updated styles.css with an abstract design */
-
 body {
     font-family: 'Poppins', sans-serif;
     display: flex;
@@ -7,74 +5,88 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     color: #333;
     overflow: hidden;
+    animation: backgroundShift 8s infinite alternate ease-in-out;
+}
+
+@keyframes backgroundShift {
+    0% {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    }
+    50% {
+        background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+    }
+    100% {
+        background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    }
 }
 
 .container {
     text-align: center;
     background: rgba(255, 255, 255, 0.85);
     padding: 40px 30px;
-    border-radius: 16px;
+    border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    width: 95%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 700px;
     animation: fadeIn 0.6s ease-in-out;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    position: relative;
 }
 
 header {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 header h1 {
-    font-size: 2.5em;
-    color: #007BFF;
+    font-size: 3em;
+    color: #f97300;
     margin: 0;
-    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
 .instructions {
-    font-size: 1.1em;
-    margin-bottom: 20px;
-    color: #444;
-    line-height: 1.6;
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    color: #555;
+    line-height: 1.8;
 }
 
 .game-area {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 #word-display {
-    font-size: 2em;
-    margin-bottom: 20px;
+    font-size: 2.5em;
+    margin-bottom: 25px;
     font-weight: bold;
     color: #212529;
     text-transform: uppercase;
     word-wrap: break-word;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 #typing-input {
-    width: calc(100% - 20px);
-    max-width: 100%;
+    width: calc(100% - 30px);
     padding: 15px;
-    font-size: 1.2em;
+    font-size: 1.3em;
     border: 2px solid transparent;
     border-radius: 12px;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.9);
+    max-width: 100%;
 }
 
 #typing-input:focus {
-    border-color: #007BFF;
+    border-color: #f97300;
     outline: none;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+    box-shadow: 0 0 12px rgba(249, 115, 0, 0.4);
 }
 
 .controls {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -87,90 +99,83 @@ header h1 {
     font-size: 1em;
     border: none;
     border-radius: 10px;
-    background-color: #007BFF;
+    background-color: #f97300;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(249, 115, 0, 0.3);
 }
 
 .controls button:hover,
 .controls select:hover {
-    background-color: #0056b3;
-    transform: scale(1.08);
-    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
+    background-color: #cc5a00;
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(249, 115, 0, 0.5);
 }
 
 .controls button:active {
-    background-color: #004085;
+    background-color: #993d00;
 }
 
 .controls select {
     background-color: #fff;
-    border: 2px solid #007BFF;
-    color: #007BFF;
+    border: 2px solid #f97300;
+    color: #f97300;
     font-weight: bold;
 }
 
 .stats {
-    margin-top: 30px;
-    font-size: 1.1em;
-    color: #444;
+    margin-top: 35px;
+    font-size: 1.2em;
+    color: #555;
 }
 
 .stats span {
     font-weight: bold;
-    color: #007BFF;
+    color: #f97300;
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Abstract styling for a unique touch */
 .container::before,
 .container::after {
     content: '';
     position: absolute;
     border-radius: 50%;
     z-index: -1;
-    opacity: 0.2;
+    opacity: 0.25;
 }
 
 .container::before {
-    width: 400px;
-    height: 400px;
-    background: #f6d365;
+    width: 450px;
+    height: 450px;
+    background: #ffe47a;
     top: -200px;
-    left: -150px;
-    filter: blur(120px);
+    left: -170px;
+    filter: blur(130px);
 }
 
 .container::after {
-    width: 300px;
-    height: 300px;
-    background: #ff9a9e;
-    bottom: -150px;
-    right: -100px;
-    filter: blur(100px);
+    width: 350px;
+    height: 350px;
+    background: #f97300;
+    bottom: -180px;
+    right: -120px;
+    filter: blur(110px);
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2em;
+    }
+
     .container {
-        width: 90%;
         padding: 25px;
     }
 
-    header h1 {
+    .instructions {
+        font-size: 1em;
+    }
+
+    #word-display {
         font-size: 2em;
     }
 
@@ -184,5 +189,32 @@ header h1 {
         font-size: 1em;
         width: 100%;
         margin: 8px 0;
+    }
+
+    .stats {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .instructions {
+        font-size: 0.9em;
+    }
+
+    #word-display {
+        font-size: 1.8em;
+    }
+
+    #typing-input {
+        font-size: 1em;
+        padding: 10px;
     }
 }
